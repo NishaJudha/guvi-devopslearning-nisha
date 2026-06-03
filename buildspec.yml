@@ -8,15 +8,11 @@ phases:
 
   build:
     commands:
-      - echo Building Docker image...
+      - echo "Building Docker image..."
       - docker build -t brain-app .
       - docker tag brain-app:latest 493392056697.dkr.ecr.ap-south-1.amazonaws.com/brain-app:latest
 
   post_build:
     commands:
-      - echo Pushing Docker image...
+      - echo "Pushing Docker image..."
       - docker push 493392056697.dkr.ecr.ap-south-1.amazonaws.com/brain-app:latest
-
-artifacts:
-  files:
-    - imagedefinitions.json
