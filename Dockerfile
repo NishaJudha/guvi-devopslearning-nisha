@@ -1,5 +1,5 @@
 # Use a lightweight Alpine-based Nginx image 
-FROM nginx:alpine
+FROM public.ecr.aws/nginx/nginx:alpine
 
 # Remove the default configuration file
 RUN rm /etc/nginx/conf.d/default.conf
