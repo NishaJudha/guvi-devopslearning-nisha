@@ -1,12 +1,17 @@
+# Use lightweight Nginx image from AWS public ECR
 FROM public.ecr.aws/nginx/nginx:alpine
 
-WORKDIR /app
+# Remove default Nginx website
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy your project files into Nginx web root
+COPY . /usr/share/nginx/html
 
-COPY . .
+# Optional: custom nginx config (only if you have one)
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 5000
+# Expose HTTP port
+EXPOSE 80
 
-CMD ["python", "app.py"]
+# Start Nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
